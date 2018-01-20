@@ -14,9 +14,13 @@ def get_current_price():
     response = requests.get(url)
     return response.json()["bpi"]["USD"]["rate_float"]
 
+c = client_example.Communicator()
 
 while True:
     reference = get_yesterdays_closing()
     current = get_current_price()
-    print(current / reference - 1)
+    if (current / reference - 1)  > 0:
+        c.send_msg("COLOR,0,00cc00")
+    else:
+        c.send_msg("COLOR,0,cc0000")
     time.sleep(60)
