@@ -22,6 +22,7 @@ def run_server():
             command = [x.strip() for x in msg.split(',')]
             logger.debug("Interpreted command: %s" % command[0])
             # now dispatch messages...
+            socket_rep.send_string("ack")
 
         else:
             logger.debug("Obviously not a command...")

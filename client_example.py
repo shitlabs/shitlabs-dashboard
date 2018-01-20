@@ -7,14 +7,15 @@ class Communicator:
         context = zmq.Context()
         self.connection_set = False
         self.socket = context.socket(zmq.REQ)
-        self.socket.connect(SERVER_ADDRESS)
+        self.socket.connect(Communicator.SERVER_ADDRESS)
         self.connection_set = True
 
 
 
     def send_msg(self, command_string):
+        """ Send Message to Server, returns true if message was accepted by server, hangs if no connection """
         if not self.connection_set:
-            self.socket.connect(SERVER_ADDRESS)
+            self.socket.connect(Communicator.SERVER_ADDRESS)
             
         #send message
         self.socket.send_string(command_string)
