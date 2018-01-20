@@ -1,4 +1,10 @@
+#!/usr/bin/env python3
+
+
 import zmq
+
+
+
 
 class Communicator:
     SERVER_ADDRESS = "tcp://127.0.0.1:12059"
@@ -23,3 +29,9 @@ class Communicator:
         reply = self.socket.recv_string()
         return reply == "ack"
 
+
+if __name__ == '__main__':
+
+    c = Communicator()
+
+    c.send_msg('FADE')

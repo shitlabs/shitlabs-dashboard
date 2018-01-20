@@ -9,6 +9,7 @@ from time import sleep, time
 
 import shitlight_simulator as shitlight
 
+from fade_pattern import FadePattern
 
 
 def zero():
@@ -46,8 +47,10 @@ def run_server():
             if command[0] == "WHITE":
                 logger.debug("Setting LED %d to white" % int(command[1]))
                 leds[int(command[1])] = white()
-            if command[0] == "BLACK":
+            elif command[0] == "BLACK":
                 leds[int(command[1])] = zero()
+            elif command[0] == "FADE":
+                leds[int(command[1])] = FadePattern().next()
 
             socket_rep.send_string("ack")
 
