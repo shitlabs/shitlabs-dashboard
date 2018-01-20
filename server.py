@@ -11,6 +11,19 @@ def white():
     while True:
         yield (255,255,255)
 
+def color(farbe,frames=0):
+    f=frames
+    while True:
+        f-=1
+        if f>=0 or frames==0:
+            yield farbe
+        else:
+            yield (0,0,0) 
+
+
+def str_to_color(string):
+    tuple(ord(c) for c in string.decode('hex'))
+
 leds = [zero()]*8
 
 
@@ -32,16 +45,35 @@ def run_server():
         msg = socket_rep.recv_string()
         logger.debug("Received Message: %s" % msg)
         if "," in msg:
-            command = [x.strip() for x in msg.split(',')]
-            logger.debug("Interpreted command: %s" % command[0])
-            # now dispatch messages...
-            if command[0] == "WHITE":
-                logger.debug("Setting LED %d to white" % int(command[1]))
-                leds[int(command[1])] = white()
-            if command[0] == "BLACK":
-                leds[int(command[1])] = zero()
+            try:
+                command = [x.strip() for x in msg.split(',')]
+                logger.debug("Interpreted command: %s" % command[0])
+                # now dispatch messages...
+                if command[0] == "WHITE":
+                    logger.debug("Setting LED %d to white" % int(command[1]))
+                    leds[int(command[1])] = white()
 
-            socket_rep.send_string("ack")
+                if command[0] == "BLACK":
+                    leds[int(command[1])] = zero()
+
+                if command[0] == "COLOR":
+                    if len(command)>2):
+                        leds[int(command[1])] = color(str_to_color(command[2]),int(command[3]))
+                    else:
+                        leds[int(command[1])] = color(str_to_color(command[2]),int(command[3]))
+
+
+                if command[0] == "FADE":
+                    raise NotImplementedError
+
+                if command[0] == "BLINK":
+                    raise NotImplementedError
+    
+            except:
+                socket_rep.send_string("err")
+                raise
+            else:
+                socket_rep.send_string("ack")
 
         else:
             logger.debug("Obviously not a command...")
