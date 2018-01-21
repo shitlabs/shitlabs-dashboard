@@ -6,7 +6,7 @@ import time
 import shitlight_simulator as shitlight
 import random
 
-leds = [0]*9
+from fade_pattern import FadePattern
 
 led_colors = [(0, 255, 0),
               (0, 0, 255),
@@ -55,10 +55,6 @@ def run_server():
 
                 elif command[1] == "ERROR":
                     leds[int(command[0])] = 4
-
-
-                #if command[0] == "BLINK":
-                #    raise NotImplementedError
     
             except:
                 socket_rep.send_string("err")
