@@ -2,6 +2,7 @@
 import lxml.html
 import requests
 import client_example
+import time
 
 c = client_example.Communicator()
 

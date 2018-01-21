@@ -1,7 +1,14 @@
 MAILTO=""
-* * * * * ~/shitlabs-dashboard/bitcoin.py
-* * * * * ~/shitlabs-dashboard/donald.py
-* * * * * ~/shitlabs-dashboard/m41.py
-0 0 * * * ~/shitlabs-dashboard/googlescholar.py
-0 * * * * ~/shitlabs-dashboard/weather.py
-* * * * * ps up `cat /tmp/uptime.pid` >/dev/null || ~/shitlabs-dashboard/uptime.py
+@reboot /home/pi/shitlabs-dashboard/server.py
+@reboot /home/pi/shitlabs-dashboard/bitcoin.py
+@reboot /home/pi/shitlabs-dashboard/donald.py
+@reboot /home/pi/shitlabs-dashboard/m41.py
+@reboot /home/pi/shitlabs-dashboard/googlescholar.py
+@reboot /home/pi/shitlabs-dashboard/weather.py
+@reboot /home/pi/shitlabs-dashboard/uptime.py
+* * * * * /home/pi/shitlabs-dashboard/bitcoin.py
+* * * * * /home/pi/shitlabs-dashboard/donald.py
+* * * * * /home/pi/shitlabs-dashboard/m41.py
+0 0 * * * /home/pi/shitlabs-dashboard/googlescholar.py
+0 * * * * /home/pi/shitlabs-dashboard/weather.py
+* * * * * ps up `cat /tmp/uptime.pid` >/dev/null || /home/pi/shitlabs-dashboard/uptime.py
