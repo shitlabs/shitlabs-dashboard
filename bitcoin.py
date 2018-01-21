@@ -17,10 +17,33 @@ def get_current_price():
 c = client_example.Communicator()
 
 while True:
-    reference = get_yesterdays_closing()
-    current = get_current_price()
-    if (current / reference - 1)  > 0:
-        c.send_msg("COLOR,0,00cc00")
-    else:
-        c.send_msg("COLOR,0,cc0000")
+    try:
+        reference = get_yesterdays_closing()
+        current = get_current_price()
+        change = (current / reference - 1) 
+        if change > 0.1:
+            c.send_msg("0,FAST")
+            c.send_msg("3,OFF")
+        if (change <= 0.1) and (change > 0.05):
+            c.send_msg("0,SLOW")
+            c.send_msg("3,OFF")
+        if (change > 0.005) and (change <= 0.05):
+            c.send_msg("0,ON")
+            c.send_msg("3,OFF")
+        if (change <= 0.005) and (change >= -0.005):
+            c.send_msg("0,OFF")
+            c.send_msg("3,OFF")
+        if (change < -0.005) and (change >= -0.05):
+            c.send_msg("0,OFF")
+            c.send_msg("3,ON")
+        if (change < -0.05) and (change >= -0.5):
+            c.send_msg("0,OFF")
+            c.send_msg("3,SLOW")
+        if (change < -0.1):
+            c.send_msg("0,OFF")
+            c.send_msg("3,FAST")
+    except:
+        c.send_msg("0,ERROR")
+        c.send_msg("3,ERROR")
+
     time.sleep(60)
