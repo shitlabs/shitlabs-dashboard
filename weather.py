@@ -15,33 +15,31 @@ def get_weather():
     temp = (float(temp) - 32) / 1.8
     return temp
 
-while True:
-    try:
-        weather = get_weather()
-        print(weather)
-        if weather <= 0:
-            c.send_msg("2,FAST")
-            c.send_msg("5,OFF")
-        elif weather < 5:
-            c.send_msg("2,SLOW")
-            c.send_msg("5,OFF")
-        elif weather < 10:
-            c.send_msg("2,ON")
-            c.send_msg("5,OFF")
-        elif weather < 15:
-            c.send_msg("2,ON")
-            c.send_msg("5,ON")
-        elif weather < 20:
-            c.send_msg("2,OFF")
-            c.send_msg("5,ON")
-        elif weather < 25:
-            c.send_msg("2,OFF")
-            c.send_msg("5,SLOW")
-        else:
-            c.send_msg("2,OFF")
-            c.send_msg("5,FAST")
-    except:
-        c.send_msg("2,ERROR")
-        c.send_msg("5,ERROR")
+try:
+    weather = get_weather()
+    print(weather)
+    if weather <= 0:
+        c.send_msg("2,FAST")
+        c.send_msg("5,OFF")
+    elif weather < 5:
+        c.send_msg("2,SLOW")
+        c.send_msg("5,OFF")
+    elif weather < 10:
+        c.send_msg("2,ON")
+        c.send_msg("5,OFF")
+    elif weather < 15:
+        c.send_msg("2,ON")
+        c.send_msg("5,ON")
+    elif weather < 20:
+        c.send_msg("2,OFF")
+        c.send_msg("5,ON")
+    elif weather < 25:
+        c.send_msg("2,OFF")
+        c.send_msg("5,SLOW")
+    else:
+        c.send_msg("2,OFF")
+        c.send_msg("5,FAST")
+except:
+    c.send_msg("2,ERROR")
+    c.send_msg("5,ERROR")
 
-    time.sleep(60*60)
