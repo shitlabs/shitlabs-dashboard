@@ -2,18 +2,33 @@
 import lxml.html
 import requests
 import time
+import client_example
+
+c = client_example.Communicator()
 
 while True:
-    req = requests.get("https://twitter.com/realdonaldtrump")
-    elements = lxml.html.document_fromstring(req.text)
-    stream = elements.find_class("stream-items")[0]
-    children = stream.getchildren()
-    for child in children:
-        if any(["pinned" in _ for _ in child.values()]):
-            continue
-        else:
-            break
+    try:
+        req = requests.get("https://twitter.com/realdonaldtrump")
+        elements = lxml.html.document_fromstring(req.text)
+        stream = elements.find_class("stream-items")[0]
+        children = stream.getchildren()
+        for child in children:
+            if any(["pinned" in _ for _ in child.values()]):
+                continue
+            else:
+                break
 
-    elapsed = time.time() - int(child.find_class("_timestamp")[0].values()[1])
-    print(elapsed / 60)
+        elapsed = time.time() - int(child.find_class("_timestamp")[0].values()[1])
+        elapsed /= 60
+        if (elapsed < 330):
+            c.send_msg("6,FAST")
+        elif (elapsed < 60):
+            c.send_msg("6,SLOW")
+        elif (elapsed < 120):
+            c.send_msg("6,ON")
+        else:
+            c.send_msg("6,OFF")
+    except:
+        c.send_msg("6,ERROR")
+
     time.sleep(60)
