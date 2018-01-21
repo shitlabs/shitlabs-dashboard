@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import lxml.html
 import requests
 import time

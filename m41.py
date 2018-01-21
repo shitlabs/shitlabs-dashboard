@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import requests
 import client_example
 import time
@@ -6,7 +7,7 @@ import time
 def get_pattern(remaining):
     if remaining <= 1:
         return "FAST"
-    elif remaining <= 5:
+    elif remaining <= 4:
         return "SLOW"
     elif remaining <= 10:
         return "ON"
