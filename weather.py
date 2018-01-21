@@ -17,6 +17,7 @@ def get_weather():
 while True:
     try:
         weather = get_weather()
+        print(weather)
         if weather <= 0:
             c.send_msg("2,FAST")
             c.send_msg("5,OFF")

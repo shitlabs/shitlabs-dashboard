@@ -26,7 +26,7 @@ while True:
             days_on = 0
 
         next_score = get_citation_count()
-
+        print(current_score, last_status, days_on)
         if next_score != current_score:
             c.send_msg("7,FAST")
             current_score = next_score

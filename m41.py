@@ -30,9 +30,11 @@ while True:
             if "Sonnen" in _["end"] and not runter:
                 c.send_msg("4,"+pattern)
                 runter = True
+                print("Runter: ", remaining)
             elif not hoch:
                 c.send_msg("1,"+pattern)
                 hoch = True
+                print("Hoch: ", remaining)
     except:
         c.send_msg("4,ERROR")
         c.send_msg("1,ERROR")

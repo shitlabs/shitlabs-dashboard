@@ -21,6 +21,7 @@ while True:
         reference = get_yesterdays_closing()
         current = get_current_price()
         change = (current / reference - 1) 
+        print(change)
         if change > 0.1:
             c.send_msg("0,FAST")
             c.send_msg("3,OFF")
