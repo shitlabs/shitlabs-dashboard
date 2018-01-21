@@ -3,6 +3,12 @@ import time
 import math
 from datetime import datetime
 import client_example
+import os
+
+pid = str(os.getpid())
+with open("/tmp/uptime.pid", "w") as f:
+    f.write(pid)
+print(pid)
 
 def is_prime(number):
     if number == 2 or number == 3:

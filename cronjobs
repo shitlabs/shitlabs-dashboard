@@ -1,0 +1,6 @@
+* * * * * ~/shitlabs-dashboard/bitcoin.py
+* * * * * ~/shitlabs-dashboard/donald.py
+* * * * * ~/shitlabs-dashboard/m41.py
+0 0 * * * ~/shitlabs-dashboard/googlescholar.py
+0 * * * * ~/shitlabs-dashboard/weather.py
+* * * * * ps up `cat /tmp/uptime.pid` >/dev/null || ~/shitlabs-dashboard/uptime.py
