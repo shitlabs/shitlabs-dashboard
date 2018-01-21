@@ -20,7 +20,7 @@ while True:
 
         elapsed = time.time() - int(child.find_class("_timestamp")[0].values()[1])
         elapsed /= 60
-        if (elapsed < 330):
+        if (elapsed < 30):
             c.send_msg("6,FAST")
         elif (elapsed < 60):
             c.send_msg("6,SLOW")

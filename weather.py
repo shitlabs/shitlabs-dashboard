@@ -1,6 +1,8 @@
 import requests
 import time
+import client_example 
 
+c = client_example.Communicator()
 
 def get_weather():
     url ="https://query.yahooapis.com/v1/public/yql?q=select%20item."\
@@ -13,8 +15,31 @@ def get_weather():
     return temp
 
 while True:
-    weather = get_weather()
-    print(weather)
+    try:
+        weather = get_weather()
+        if weather <= 0:
+            c.send_msg("2,FAST")
+            c.send_msg("5,OFF")
+        elif weather < 5:
+            c.send_msg("2,SLOW")
+            c.send_msg("5,OFF")
+        elif weather < 10:
+            c.send_msg("2,ON")
+            c.send_msg("5,OFF")
+        elif weather < 15:
+            c.send_msg("2,ON")
+            c.send_msg("5,ON")
+        elif weather < 20:
+            c.send_msg("2,OFF")
+            c.send_msg("5,ON")
+        elif weather < 25:
+            c.send_msg("2,OFF")
+            c.send_msg("5,SLOW")
+        else:
+            c.send_msg("2,OFF")
+            c.send_msg("5,FAST")
+    except:
+        c.send_msg("2,ERROR")
+        c.send_msg("5,ERROR")
+
     time.sleep(60*60)
-
-

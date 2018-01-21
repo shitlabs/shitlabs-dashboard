@@ -12,10 +12,10 @@ leds = [0] * 9
 
 led_colors = [(0, 255, 0),
               (0, 0, 255),
-              (255, 0, 0),
+              (0, 0, 255),
               (255, 0, 0),
               (0, 0, 255),
-              (0, 0, 255),
+              (255, 0, 0),
               (255, 0, 0),
               (0, 255, 0),
               (0, 255, 0)
@@ -43,7 +43,6 @@ def run_server():
                 # logger.debug("Interpreted command: %s" % command[0])
                 # now dispatch messages...
                 if command[1] == "ON":
-                    print("switching ", command[0], " on")
                     leds[int(command[0])] = 1
 
                 elif command[1] == "OFF":

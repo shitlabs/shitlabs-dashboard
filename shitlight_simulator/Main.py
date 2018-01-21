@@ -48,3 +48,5 @@ class Dashboard(threading.Thread):
             self.canvas.queue.put(colors)
             self.canvas.trigger.emit()
 
+    
+
