@@ -8,6 +8,8 @@ import random
 
 from fade_pattern import FadePattern
 
+leds = [0] * 9
+
 led_colors = [(0, 255, 0),
               (0, 0, 255),
               (255, 0, 0),
@@ -100,7 +102,6 @@ def simulator():
                 if status == 4 and ran >= 0.5:
                     rgbs.append((0,0,0))
 
-            print(rgbs)
             dashboard.set_color(rgbs)
             time.sleep(1/fps)
 
