@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import requests
 import client_example
+import json
+import subprocess
 
 
 def get_pattern(remaining):
@@ -18,9 +20,18 @@ c = client_example.Communicator()
 
 
 try:
-    url = "https://bvg-grabber-api.herokuapp.com/actual?station=Geygerstr"
-    response = requests.get(url)
-    response = response.json()
+    try:
+        url = "https://bvg-grabber-api.herokuapp.com/actual?station=Geygerstr"
+        response = requests.get(url)
+        response = response.json()
+    except: 
+        try:
+            subprocess.call("""bvg-grabber.py "Geygerstr" /tmp/out.f""", shell=True)
+            with open("/tmp/out.f", "r") as infile:
+                response = json.load(infile)
+        except:
+            c.send_msg("4,ERROR")
+            c.send_msg("1,ERROR")    
     
     runter = False
     hoch = False

@@ -24,7 +24,7 @@ try:
         c.send_msg("6,FAST")
     elif (elapsed < 60):
         c.send_msg("6,SLOW")
-    elif (elapsed < 120):
+    elif (elapsed < 300):
         c.send_msg("6,ON")
     else:
         c.send_msg("6,OFF")
